@@ -1,0 +1,18 @@
+name: Publish TinyCiv staging
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: staging-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    uses: tinyciv/tinyciv.github.io/.github/workflows/deploy-staging.yml@staging
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    with:
+      multiplayer_url: ${{ vars.STAGING_MULTIPLAYER_URL }}
